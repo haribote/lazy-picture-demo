@@ -1,6 +1,9 @@
 <template>
   <div class="picture" :class="classNames">
-    <img :src="currentSrc" :srcset="currentSrcSet" :sizes="sizes" :alt="alt">
+    <transition name="fade">
+      <img v-if="!isLoaded" key="placeholder" :src="placeholderSrc" :alt="alt">
+      <img v-else key="real" :src="alternativeSrc" :srcset="srcset" :sizes="sizes" :alt="alt">
+    </transition>
   </div>
 </template>
 
@@ -11,7 +14,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class LazyPicture extends Vue {
   @Prop({ type: IntersectionObserver })
-  observer = new IntersectionObserver(this.handleIntersection)
+  observer = new IntersectionObserver(this.handleIntersection, {
+    threshold: 0.8
+  })
 
   @Prop({ required: true })
   placeholderSrc!: string
@@ -39,18 +44,10 @@ export default class LazyPicture extends Vue {
 
   isLoaded = false
 
-  get currentSrc() {
-    return this.isLoaded ? this.alternativeSrc : this.placeholderSrc
-  }
-
   get alternativeSrc() {
     return this.srcset
       .split(',')[0]
       .replace(/^(.+\.(png|jpe?g|gif|webp)) +.+/, '$1')
-  }
-
-  get currentSrcSet() {
-    return this.isLoaded ? this.srcset : this.placeholderSrc
   }
 
   get classNames() {
@@ -60,7 +57,8 @@ export default class LazyPicture extends Vue {
       'is-blur': isBlur && !isLoaded,
       'is-landscape': isLandscape,
       'is-portrait': isPortrait,
-      'is-square': isSquare
+      'is-square': isSquare,
+      'is-waiting': !isLoaded
     }
   }
 
@@ -90,5 +88,45 @@ export default class LazyPicture extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.picture {
+  position: relative;
+  will-change: filter;
+
+  img {
+    will-change: opacity;
+  }
+
+  &.is-blur {
+    transition: filter 300ms ease;
+  }
+}
+
+.fade {
+  @at-root {
+    &-enter {
+      opacity: 0;
+    }
+    &-enter-active {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transition: opacity 300ms ease;
+    }
+    &-enter-to {
+      opacity: 1;
+    }
+    &-leave {
+      opacity: 1;
+    }
+    &-leave-active {
+      transition: opacity 300ms ease;
+    }
+    &-enter-to {
+      opacity: 0.5;
+    }
+  }
+}
 </style>
