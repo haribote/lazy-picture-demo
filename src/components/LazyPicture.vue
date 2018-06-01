@@ -15,7 +15,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 export default class LazyPicture extends Vue {
   @Prop({ type: IntersectionObserver })
   observer = new IntersectionObserver(this.handleIntersection, {
-    threshold: 0.8
+    threshold: 0.5
   })
 
   @Prop({ required: true })
@@ -98,7 +98,7 @@ export default class LazyPicture extends Vue {
   }
 
   &.is-blur {
-    transition: filter 300ms ease;
+    transition: filter 300ms linear;
   }
 }
 
@@ -113,7 +113,7 @@ export default class LazyPicture extends Vue {
       left: 0;
       right: 0;
       margin: auto;
-      transition: opacity 300ms ease;
+      transition: opacity 300ms linear;
     }
     &-enter-to {
       opacity: 1;
@@ -122,7 +122,7 @@ export default class LazyPicture extends Vue {
       opacity: 1;
     }
     &-leave-active {
-      transition: opacity 300ms ease;
+      transition: opacity 300ms linear;
     }
     &-enter-to {
       opacity: 0.5;
