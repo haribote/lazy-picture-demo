@@ -124,8 +124,8 @@ export default class LazyPicture extends Vue {
     &-leave-active {
       transition: opacity 300ms linear;
     }
-    &-enter-to {
-      opacity: 0.5;
+    &-leave-to {
+      opacity: 0.99;
     }
   }
 }
