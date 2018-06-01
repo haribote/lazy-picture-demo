@@ -2,6 +2,6 @@
 
 exports[`LazyPicture.vue matches snapshot 1`] = `
 <div class="picture">
-  <img src="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg" sizes="1024px" alt="image for testing">
+  <img src="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg" srcset="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg" sizes="1024px" alt="image for testing">
 </div>
 `;
