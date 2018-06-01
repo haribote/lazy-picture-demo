@@ -2,8 +2,6 @@ import 'normalize.css'
 import './assets/style.scss'
 import LazyPicture from './components/LazyPicture.vue'
 
-console.log('deploy')
-
 Array.from(document.querySelectorAll('.js-picture')).forEach(el => {
   const imgEl = el.querySelector('img')
 
