@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts">
+import 'core-js/fn/map'
 import 'intersection-observer'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import LazyPicture from './components/LazyPicture.vue'
