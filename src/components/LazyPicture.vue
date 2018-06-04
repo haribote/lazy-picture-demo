@@ -8,15 +8,15 @@
 </template>
 
 <script lang="ts">
-require('intersection-observer')
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class LazyPicture extends Vue {
-  @Prop({ type: IntersectionObserver })
-  observer = new IntersectionObserver(this.handleIntersection, {
-    threshold: 0.5
+  @Prop({
+    required: true,
+    type: IntersectionObserver
   })
+  observer!: IntersectionObserver
 
   @Prop({ required: true })
   placeholderSrc!: string
@@ -63,7 +63,7 @@ export default class LazyPicture extends Vue {
   }
 
   mounted() {
-    this.observer.observe(this.$el)
+    this.$emit('ready', this.$el, this.preloadImage)
   }
 
   preloadImage() {
@@ -75,15 +75,6 @@ export default class LazyPicture extends Vue {
     imgEl.sizes = sizes
     imgEl.srcset = srcset
     imgEl.src = alternativeSrc
-  }
-
-  handleIntersection(entries: IntersectionObserverEntry[]) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        this.observer.unobserve(this.$el)
-        this.preloadImage()
-      }
-    })
   }
 }
 </script>

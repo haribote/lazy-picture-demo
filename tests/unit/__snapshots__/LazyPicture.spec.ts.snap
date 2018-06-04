@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LazyPicture.vue matches snapshot 1`] = `
+exports[`LazyPicture.vue as default matches snapshot 1`] = `
+<div class="picture is-waiting">
+  <img src="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg" alt="image for testing" name="fade">
+</div>
+`;
+
+exports[`LazyPicture.vue as loaded matches snapshot 1`] = `
 <div class="picture">
-  <img src="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg" srcset="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg" sizes="1024px" alt="image for testing">
+  <img src="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_b.jpg" srcset="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_b.jpg 1x, https://c2.staticflickr.com/8/7019/6748869373_f7d856f99c_o.jpg 2x" sizes="1024px" alt="image for testing"
+    name="fade">
 </div>
 `;
