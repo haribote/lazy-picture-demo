@@ -8,15 +8,15 @@
 </template>
 
 <script lang="ts">
-require('intersection-observer')
 import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class LazyPicture extends Vue {
-  @Prop({ type: IntersectionObserver })
-  observer = new IntersectionObserver(this.handleIntersection, {
-    threshold: 0.8
+  @Prop({
+    required: true,
+    type: IntersectionObserver
   })
+  observer!: IntersectionObserver
 
   @Prop({ required: true })
   placeholderSrc!: string
@@ -63,7 +63,7 @@ export default class LazyPicture extends Vue {
   }
 
   mounted() {
-    this.observer.observe(this.$el)
+    this.$emit('ready', this.$el, this.preloadImage)
   }
 
   preloadImage() {
@@ -75,15 +75,6 @@ export default class LazyPicture extends Vue {
     imgEl.sizes = sizes
     imgEl.srcset = srcset
     imgEl.src = alternativeSrc
-  }
-
-  handleIntersection(entries: IntersectionObserverEntry[]) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        this.observer.unobserve(this.$el)
-        this.preloadImage()
-      }
-    })
   }
 }
 </script>
@@ -98,7 +89,7 @@ export default class LazyPicture extends Vue {
   }
 
   &.is-blur {
-    transition: filter 300ms ease;
+    transition: filter 300ms linear;
   }
 }
 
@@ -113,7 +104,7 @@ export default class LazyPicture extends Vue {
       left: 0;
       right: 0;
       margin: auto;
-      transition: opacity 300ms ease;
+      transition: opacity 300ms linear;
     }
     &-enter-to {
       opacity: 1;
@@ -122,10 +113,10 @@ export default class LazyPicture extends Vue {
       opacity: 1;
     }
     &-leave-active {
-      transition: opacity 300ms ease;
+      transition: opacity 300ms linear;
     }
-    &-enter-to {
-      opacity: 0.5;
+    &-leave-to {
+      opacity: 0.99;
     }
   }
 }
