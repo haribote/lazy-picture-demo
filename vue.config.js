@@ -23,6 +23,13 @@ module.exports = {
         },
         template: `${__dirname}/public/embedded-svg.html`,
         filename: 'embedded-svg.html'
+      }),
+      new HtmlWebpackPlugin({
+        templateParameters: {
+          BASE_URL: '/'
+        },
+        template: `${__dirname}/public/convert-sample.html`,
+        filename: 'convert-sample.html'
       })
     ]
   },
