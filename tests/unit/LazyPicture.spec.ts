@@ -8,7 +8,6 @@ describe('LazyPicture.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(LazyPicture, {
       propsData: {
-        observer: new IntersectionObserver(() => undefined),
         placeholderSrc:
           'https://c2.staticflickr.com/8/7019/6748869373_160471ded5_m.jpg',
         srcset:

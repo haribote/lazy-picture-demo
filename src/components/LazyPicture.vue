@@ -12,12 +12,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class LazyPicture extends Vue {
-  @Prop({
-    required: true,
-    type: IntersectionObserver
-  })
-  observer!: IntersectionObserver
-
   @Prop({ required: true })
   placeholderSrc!: string
 
