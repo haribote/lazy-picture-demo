@@ -69,6 +69,8 @@ export default class LazyPicture extends Vue {
     imgEl.sizes = sizes
     imgEl.srcset = srcset
     imgEl.src = alternativeSrc
+
+    return imgEl
   }
 }
 </script>

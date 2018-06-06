@@ -42,4 +42,10 @@ describe('LazyPicture.vue', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
   })
+
+  describe('preloadImage()', () => {
+    it('matches snapshot', () => {
+      expect((wrapper.vm as any).preloadImage()).toMatchSnapshot()
+    })
+  })
 })

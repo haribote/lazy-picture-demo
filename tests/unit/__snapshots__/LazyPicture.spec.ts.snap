@@ -12,3 +12,11 @@ exports[`LazyPicture.vue as loaded matches snapshot 1`] = `
     name="fade">
 </div>
 `;
+
+exports[`LazyPicture.vue preloadImage() matches snapshot 1`] = `
+<img
+  sizes="1024px"
+  src="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_b.jpg"
+  srcset="https://c2.staticflickr.com/8/7019/6748869373_160471ded5_b.jpg 1x, https://c2.staticflickr.com/8/7019/6748869373_f7d856f99c_o.jpg 2x"
+/>
+`;
