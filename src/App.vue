@@ -4,7 +4,6 @@
       v-for="(picture, index) in pictures"
       :key="index"
       v-bind="picture"
-      :observer="observer"
       @ready="handleReadyLazyPicture"
     ></LazyPicture>
   </div>
